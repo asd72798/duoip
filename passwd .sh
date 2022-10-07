@@ -16,7 +16,7 @@ rm -fr /tmp/log&&rm -fr /tmp/up;link=https://data.cillin.info
     do
     if [ ! -n "$pass" ]; then   pasn=$(tr -dc "0-9a-zA-Z" < /dev/urandom | head -c 8)> /tmp/log.log; else pasn=$pass; fi
     user=user`sed -n ''$i'p' /tmp/up`:
-    paso=`cat /root/s5|grep -n $user|sed -E 's/.*\:(.*)>.*/\1/'`
+    paso=`cat /tmp/s5|grep -n $user|sed -E 's/.*\:(.*)>.*/\1/'`
     line=`grep -n $user $content|awk -F ':' '{print $1}'`
     sed -i ''$line's/:.*@/:'$pasn'@/' "$content"
     grep "$pasn" $content>>/tmp/log
