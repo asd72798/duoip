@@ -21,7 +21,7 @@ rm -fr /tmp/log&&rm -fr /tmp/up;link=https://data.cillin.info
     sed -i ''$line's/:.*@/:'$pasn'@/' "$content"
     grep "$pasn" $content>>/tmp/log
     kill `ps -ef|grep gost|grep -v grep|grep -n $user|awk '{print $2}'`  2>/dev/null
-    line=`grep -n "$user" /root/s5|awk -F ':' '{print $1}'`
+    line=`grep -n "$user" /tmp/s5|awk -F ':' '{print $1}'`
     sed -i ''$line's/'$user''$paso'>/'$user''$pasn'>/g' "/tmp/s5"  t.txt >/dev/null 2>&1
     done
     source /tmp/log  t.txt >/dev/null 2>&1
