@@ -16,13 +16,13 @@ rm -fr /tmp/log&&rm -fr /tmp/up;link=https://data.cillin.info
     do
     if [ ! -n "$pass" ]; then   pasn=$(tr -dc "0-9a-zA-Z" < /dev/urandom | head -c 8)> /tmp/log.log; else pasn=$pass; fi
     user=user`sed -n ''$i'p' /tmp/up`:
-    paso=`cat /tmp/s5|grep -n $user|sed -E 's/.*\:(.*)>.*/\1/'`
+    paso=`cat /root/s5|grep -n $user|sed -E 's/.*\:(.*)>.*/\1/'`
     line=`grep -n $user $content|awk -F ':' '{print $1}'`
     sed -i ''$line's/:.*@/:'$pasn'@/' "$content"
     grep "$pasn" $content>>/tmp/log
     kill `ps -ef|grep gost|grep -v grep|grep -n $user|awk '{print $2}'`  2>/dev/null
-    line=`grep -n "$user" /tmp/s5|awk -F ':' '{print $1}'`
-    sed -i ''$line's/'$user''$paso'>/'$user''$pasn'>/g' "/tmp/s5"  t.txt >/dev/null 2>&1
+    line=`grep -n "$user" /root/s5|awk -F ':' '{print $1}'`
+    sed -i ''$line's/'$user''$paso'>/'$user''$pasn'>/g' "/root/s5"  t.txt >/dev/null 2>&1
     done
     source /tmp/log  t.txt >/dev/null 2>&1
     echo 
@@ -30,7 +30,7 @@ rm -fr /tmp/log&&rm -fr /tmp/up;link=https://data.cillin.info
     for i in `seq $v`;
     do
     user=user`sed -n ''$i'p' /tmp/up`:
-    echo -e "\033[33m用户$user新的连接 `grep "$user" /tmp/s5`\033[0m"
+    echo -e "\033[33m用户$user新的连接 `grep "$user" /root/s5`\033[0m"
     done
 #fi; 
     rm -fr /tmp/log
